@@ -1,36 +1,38 @@
 function convertToRoman(num) {
-  const map = {
-    I: 1,
-    V: 5,
-    X: 10,
-    L: 50,
-    C: 100,
-    D: 500,
-    M: 1000
-  };
+  // 1. Create a map of values and their symbols
+  // We include special cases like 4 (IV) and 9 (IX) for easier calculation
+  const romanMap = [
+    { value: 1000, symbol: 'M' },
+    { value: 900, symbol: 'CM' },
+    { value: 500, symbol: 'D' },
+    { value: 400, symbol: 'CD' },
+    { value: 100, symbol: 'C' },
+    { value: 90, symbol: 'XC' },
+    { value: 50, symbol: 'L' },
+    { value: 40, symbol: 'XL' },
+    { value: 10, symbol: 'X' },
+    { value: 9, symbol: 'IX' },
+    { value: 5, symbol: 'V' },
+    { value: 4, symbol: 'IV' },
+    { value: 1, symbol: 'I' }
+  ];
 
-  let total = 0;
+  let result = '';
 
-  for (let i = 0; i < roman.length; i++) {
-    const current = map[roman[i]];
-    const next = map[roman[i + 1]];
-
-    // If current value is smaller than next, subtract it
-    if (current < next) {
-      total -= current;
-    } else {
-      total += current;
+  // 2. Loop through the map
+  for (const item of romanMap) {
+    // 3. While the number is larger than the current symbol value
+    while (num >= item.value) {
+      result += item.symbol; // Add the symbol (e.g., 'X')
+      num -= item.value;    // Subtract the value (e.g., 10)
     }
   }
 
-  return total;
+  return result;
 }
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
 
-// console.log(convertToRoman(36));
+// Test the function
+console.log(convertToRoman(36)); // Output: XXXVI
+console.log(convertToRoman(9));  // Output: IX
 
-
-
-
-// do not edit below this line
-module.exports = convertToRoman
+module.exports = convertToRoman;
